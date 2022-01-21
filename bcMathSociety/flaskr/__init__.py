@@ -1,7 +1,7 @@
 import os
 
 from flask import Flask
-from flask_pymongo import PyMongo
+from db import mongo
 
 def create_app(test_config=None):
     # create and configure the app
@@ -28,4 +28,7 @@ def create_app(test_config=None):
     def hello():
         return 'Hello, World!'
 
+    mongo.init_app(app)
+
     return app
+
