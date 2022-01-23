@@ -1,7 +1,9 @@
 import os
+from xml.etree.ElementInclude import include
 
 from flask import Flask
-from db import mongo
+from .db import mongo
+
 
 def create_app(test_config=None):
     # create and configure the app
@@ -29,6 +31,9 @@ def create_app(test_config=None):
         return 'Hello, World!'
 
     mongo.init_app(app)
+
+    from . import auth
+    app.register_blueprint(auth.bp)
 
     return app
 
